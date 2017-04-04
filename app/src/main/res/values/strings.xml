@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PopularMovies1</string>
+
+    <!--menu strings-->
+    <string name="menu_topRated">Top Rated</string>
+    <string name="menu_mostPopular">Most Popular</string>
+    <string name="menu_upComing">Up Coming</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="rating_max">/10</string>
+
+</resources>

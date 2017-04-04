@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:id="@+id/movie_poster"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:layout_height="300dp"
+        android:layout_width="200dp"
+        android:src="@drawable/ic_photo_album_black_24dp"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:id="@+id/movie_poster_image"
+        android:contentDescription="Movie poster"/>
+
+</FrameLayout>

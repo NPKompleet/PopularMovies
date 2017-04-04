@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/topRated"
+            android:title="@string/menu_topRated"
+            android:checked="true" />
+
+        <item android:id="@+id/mostPopular"
+            android:title="@string/menu_mostPopular"
+            android:checked="true"/>
+
+        <item android:id="@+id/upComing"
+            android:title="@string/menu_upComing"
+            android:checked="true"/>
+    </group>
+
+</menu>
