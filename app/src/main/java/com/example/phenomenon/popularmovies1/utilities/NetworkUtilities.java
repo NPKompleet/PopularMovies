@@ -29,7 +29,7 @@ public class NetworkUtilities {
     private final static String MOVIEDB_BASE_URL = "http://api.themoviedb.org/3/movie/";
     private final static String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w185/";
     private final static String PARAM_KEY = "api_key";
-    private final static String API_KEY = "abcdefghijk"; //needs valid key to work
+    private final static String API_KEY = "abcdefghi"; //needs valid key to work
 
     public static URL buildJSONUrl(String sortOrder) {
         Uri myUri = Uri.parse(MOVIEDB_BASE_URL).buildUpon()

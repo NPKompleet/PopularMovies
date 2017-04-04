@@ -11,6 +11,6 @@
         android:scaleType="centerCrop"
         android:layout_gravity="center"
         android:id="@+id/movie_poster_image"
-        android:contentDescription="Movie poster"/>
+        android:contentDescription="@string/movie_poster"/>
 
 </FrameLayout>

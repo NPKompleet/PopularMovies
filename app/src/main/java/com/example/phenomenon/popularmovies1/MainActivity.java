@@ -109,21 +109,24 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         //String url;
 
         switch (itemId) {
-            case R.id.topRated:
-                //
-                MovieContent.MOVIES.clear();
-                getMovieBySortOrder("top_rated");
-                break;
             case R.id.mostPopular:
                 //
                 MovieContent.MOVIES.clear();
+                if (!item.isChecked()) item.setChecked(true);
                 getMovieBySortOrder("popular");
                 break;
 
             case R.id.upComing:
                 //
                 MovieContent.MOVIES.clear();
+                if (!item.isChecked()) item.setChecked(true);
                 getMovieBySortOrder("upcoming");
+                break;
+            case R.id.topRated:
+                //
+                MovieContent.MOVIES.clear();
+                if (!item.isChecked()) item.setChecked(true);
+                getMovieBySortOrder("top_rated");
                 break;
 
         }

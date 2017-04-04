@@ -23,7 +23,7 @@
             android:src="@drawable/ic_image_black_24dp"
             android:scaleType="centerCrop"
             android:id="@+id/detail_image"
-            android:contentDescription="movie detail image"/>
+            android:contentDescription="@string/detail_image"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:layout_marginStart="@dimen/detail_left_margin"
             android:layout_marginTop="@dimen/detail_top_margin"
             android:textSize="20sp"
-            android:text="2015" />
+            tools:text="2015-2-3" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             android:layout_marginTop="@dimen/detail_top_margin"
             android:textSize="15sp"
             android:textStyle="italic"
-            android:text="120min"/>
+            tools:text="True Grit"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             android:layout_marginTop="@dimen/detail_top_margin"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:text="8.3/10"/>
+            tools:text="8.3/10"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_marginTop="@dimen/detail_top_margin"
             android:layout_toEndOf="@+id/detail_image"
             android:layout_below="@id/detail_rating"
-            android:text="MARK AS \n FAVOURITE"
+            android:text="@string/detail_button_text"
             />
 
     </RelativeLayout>
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Trailers:"/>
+            tools:text="Trailers:"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

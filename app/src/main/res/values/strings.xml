@@ -9,4 +9,8 @@
 
     <string name="rating_max">/10</string>
 
+    <string name="detail_image">Movie Detail Image</string>
+    <string name="detail_button_text">MARK AS \n FAVOURITE</string>
+    <string name="movie_poster">Movie Poster</string>
+
 </resources>

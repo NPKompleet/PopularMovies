@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/topRated"
-            android:title="@string/menu_topRated"
-            android:checked="true" />
 
         <item android:id="@+id/mostPopular"
             android:title="@string/menu_mostPopular"
@@ -13,7 +9,12 @@
 
         <item android:id="@+id/upComing"
             android:title="@string/menu_upComing"
-            android:checked="true"/>
+            android:checked="false"/>
+
+        <item android:id="@+id/topRated"
+            android:title="@string/menu_topRated"
+            android:checked="false" />
+
     </group>
 
 </menu>
