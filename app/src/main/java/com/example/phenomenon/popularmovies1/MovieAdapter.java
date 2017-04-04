@@ -16,7 +16,8 @@ import java.util.ArrayList;
 
 
 /**
- * Created by PHENOMENON on 3/30/2017.
+ * @author Philip Okonkwo
+ * Created on 3/30/2017.
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterHolder> {
@@ -50,8 +51,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterHolder
     public void onBindViewHolder(MovieAdapter.PosterHolder holder, int position) {
         MovieContent.MyMovie movie= myMovies.get(position);
         URL imgURL= NetworkUtilities.buildPosterUrl(movie.getPosterUrl());
+        //load image
         Picasso.with(context).load(imgURL.toString()).into(holder.imageView);
-        //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(holder.imageView);
 
     }
 

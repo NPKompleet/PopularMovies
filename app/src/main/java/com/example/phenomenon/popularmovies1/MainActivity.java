@@ -21,9 +21,11 @@ import com.example.phenomenon.popularmovies1.utilities.NetworkUtilities;
 
 
 import java.net.URL;
-import static com.example.phenomenon.popularmovies1.utilities.NetworkUtilities.buildJSONUrl;
 
-
+/**
+ * @author Philip Okonkwo
+ * Created on 3/30/2017.
+ */
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieItemClickListener{
 
     RecyclerView mMovieGrid;
@@ -49,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     }
 
+    /**
+     * Gets movie from movie endpoints by sortorder
+     * and calls the task to be performed on another thread
+     * @param sortOrder: movie sort order
+     */
     public void getMovieBySortOrder(String sortOrder){
         if (isOnline()){
             new MovieDBQueryTask().execute(NetworkUtilities.buildJSONUrl(sortOrder));
@@ -69,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
 
+     // The background thread execution class
     class MovieDBQueryTask extends AsyncTask<URL, Void, String>{
 
         @Override
@@ -134,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         return super.onOptionsItemSelected(item);
     }
 
+    //check for internet connectivity
     public boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

@@ -9,10 +9,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -21,7 +19,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by PHENOMENON on 3/30/2017.
+ * @author Philip Okonkwo
+ * Created on 3/30/2017.
  * For all network calls
  */
 
@@ -31,6 +30,11 @@ public class NetworkUtilities {
     private final static String PARAM_KEY = "api_key";
     private final static String API_KEY = "abcdefghi"; //needs valid key to work
 
+    /**
+     * Builds the JSON URL
+     * @param sortOrder: the type of sorting wanted
+     * @return URL
+     */
     public static URL buildJSONUrl(String sortOrder) {
         Uri myUri = Uri.parse(MOVIEDB_BASE_URL).buildUpon()
                 .appendPath(sortOrder)
@@ -46,7 +50,11 @@ public class NetworkUtilities {
         return url;
     }
 
-
+    /**
+     * Builds a poster image URL
+     * @param posterPath: the path of the poster image
+     * @return URL with the path appended
+     */
     public static URL buildPosterUrl(String posterPath) {
         String myUri= POSTER_BASE_URL.concat(posterPath);
         URL url = null;
@@ -59,6 +67,11 @@ public class NetworkUtilities {
         return url;
     }
 
+    /**
+     * Fetches JSON data from a URL
+     * @param url: url to fetch data from
+     * @return jsonData: returns the string format of the data
+     */
 
     public static String fetchData(URL url){
         OkHttpClient client = new OkHttpClient();
@@ -81,6 +94,11 @@ public class NetworkUtilities {
 
     }
 
+    /**
+     * Makes movie object from json url
+     * @param url same as above
+     * @return
+     */
     public static String makeMovies(URL url){
         //URL u=url; //for debugging
         String result= null;
@@ -104,9 +122,6 @@ public class NetworkUtilities {
                     String title = obj.getString("original_title");
                     Double rating = obj.getDouble("vote_average");
                     Long id = obj.getLong("id");
-                    if (i == 2) {
-                        result = posterURL;
-                    }
 
                     MovieContent.MyMovie myMovie = new MovieContent.MyMovie(posterURL, synopsis, releaseDate,
                             title, rating, id);
@@ -116,8 +131,6 @@ public class NetworkUtilities {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-           // }
             return result;
     }
 
