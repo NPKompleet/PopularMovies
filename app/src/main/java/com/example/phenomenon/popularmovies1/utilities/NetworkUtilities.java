@@ -29,7 +29,7 @@ public class NetworkUtilities {
     private final static String MOVIEDB_BASE_URL = "http://api.themoviedb.org/3/movie/";
     private final static String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w185/";
     private final static String PARAM_KEY = "api_key";
-    private final static String API_KEY = "60c5a684b38dafaea8e8296973ba0aeb"; //needs valid key to work
+    private final static String API_KEY = "abcdefghi"; //needs valid key to work
 
     /**
      * Builds the JSON URL
@@ -77,16 +77,16 @@ public class NetworkUtilities {
     public static String fetchData(URL url){
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType= MediaType.parse("application/octet_stream");
+        //MediaType mediaType= MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(mediaType, "{}");
         Request request = new Request.Builder()
                 .url(url)
                 .get()
                 .build();
-        Response responses;
-        String jsonData = null;
+        String jsonData=null;
 
         try {
-            responses = client.newCall(request).execute();
+            Response responses = client.newCall(request).execute();
             jsonData = responses.body().string();
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,7 +107,6 @@ public class NetworkUtilities {
         String result= null;
             try {
                 result=fetchData(url);
-
 
             }catch (Exception e){
                 e.printStackTrace();
