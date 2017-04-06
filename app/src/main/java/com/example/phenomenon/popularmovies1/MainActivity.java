@@ -16,11 +16,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.phenomenon.popularmovies1.utilities.MovieContent;
+import com.example.phenomenon.popularmovies1.utilities.MyMovie;
 import com.example.phenomenon.popularmovies1.utilities.NetworkUtilities;
 
 
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * @author Philip Okonkwo
@@ -30,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     RecyclerView mMovieGrid;
     ProgressBar mPBar;
-    //LinearLayout mNetworkNote;
+    ArrayList<MyMovie> myMovieArray = new ArrayList<>();
+    MovieAdapter mAdapter;
 
 
     @Override
@@ -45,9 +47,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mMovieGrid.setLayoutManager(gridLayoutManager);
         //mMovieGrid.setHasFixedSize(true);
 
-        MovieAdapter mAdapter = new MovieAdapter(MovieContent.MOVIES,this);
+        //MovieAdapter mAdapter = new MovieAdapter(MovieContent.MOVIES,this);
+        mAdapter = new MovieAdapter(myMovieArray,this);
         mMovieGrid.setAdapter(mAdapter);
         getMovieBySortOrder("popular");
+
 
     }
 
@@ -68,16 +72,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     public void onListItemClicked(int clickedItemPosition) {
+        MyMovie movie= myMovieArray.get(clickedItemPosition);
         final String PARCEL_KEY= "MOVIE";
         Intent intent= new Intent(this, DetailActivity.class);
-        MovieContent.MyMovie movie= MovieContent.MOVIES.get(clickedItemPosition);
+        //MyMovie movie= MovieContent.MOVIES.get(clickedItemPosition);
         intent.putExtra(PARCEL_KEY, movie);
         startActivity(intent);
     }
 
 
      // The background thread execution class
-    class MovieDBQueryTask extends AsyncTask<URL, Void, String>{
+    //class MovieDBQueryTask extends AsyncTask<URL, Void, String>{
+    class MovieDBQueryTask extends AsyncTask<URL, Void, ArrayList<MyMovie>>{
 
         @Override
         protected void onPreExecute(){
@@ -87,17 +93,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
 
         @Override
-        protected String doInBackground(URL... urls) {
+        //protected String doInBackground(URL... urls) {
+        protected ArrayList<MyMovie> doInBackground(URL... urls) {
             URL url= urls[0];
             return NetworkUtilities.makeMovies(url);
         }
 
         @Override
-        protected void onPostExecute(String s){
-            if (s!=null && !s.equals("")){
-
-                MovieAdapter Adapter = new MovieAdapter(MovieContent.MOVIES, MainActivity.this);
-                mMovieGrid.swapAdapter(Adapter, true);
+        protected void onPostExecute(ArrayList<MyMovie> movieArrayList){
+            //if (s!=null && !s.equals("")){
+            if (movieArrayList !=null){
+                //MovieAdapter Adapter = new MovieAdapter(MovieContent.MOVIES, MainActivity.this);
+                //mMovieGrid.swapAdapter(Adapter, true);
+                mAdapter.swapData(movieArrayList);
                 mPBar.setVisibility(View.INVISIBLE);
             }
         }
@@ -119,20 +127,20 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         switch (itemId) {
             case R.id.mostPopular:
                 //
-                MovieContent.MOVIES.clear();
+                //MovieContent.MOVIES.clear();
                 if (!item.isChecked()) item.setChecked(true);
                 getMovieBySortOrder("popular");
                 break;
 
             case R.id.upComing:
                 //
-                MovieContent.MOVIES.clear();
+                //MovieContent.MOVIES.clear();
                 if (!item.isChecked()) item.setChecked(true);
                 getMovieBySortOrder("upcoming");
                 break;
             case R.id.topRated:
                 //
-                MovieContent.MOVIES.clear();
+                //MovieContent.MOVIES.clear();
                 if (!item.isChecked()) item.setChecked(true);
                 getMovieBySortOrder("top_rated");
                 break;

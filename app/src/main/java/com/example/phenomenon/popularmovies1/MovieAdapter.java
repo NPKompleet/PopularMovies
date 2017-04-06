@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.phenomenon.popularmovies1.utilities.MovieContent;
+import com.example.phenomenon.popularmovies1.utilities.MyMovie;
 import com.example.phenomenon.popularmovies1.utilities.NetworkUtilities;
 import com.squareup.picasso.Picasso;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterHolder> {
-    private final ArrayList<MovieContent.MyMovie> myMovies;
+    private ArrayList<MyMovie> myMovies;
     private Context context;
     private final MovieItemClickListener mOnMovieClickListener;
 
@@ -29,9 +29,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterHolder
         void onListItemClicked(int clickedItemPosition);
     }
 
-    public MovieAdapter(ArrayList<MovieContent.MyMovie> movies, MovieItemClickListener listener){
+    public MovieAdapter(ArrayList<MyMovie> movies, MovieItemClickListener listener){
         myMovies = movies;
         mOnMovieClickListener= listener;
+    }
+
+    public void swapData(ArrayList<MyMovie> newMovieList){
+        myMovies.clear();
+        myMovies.addAll(newMovieList);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -49,7 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterHolder
 
     @Override
     public void onBindViewHolder(MovieAdapter.PosterHolder holder, int position) {
-        MovieContent.MyMovie movie= myMovies.get(position);
+        MyMovie movie= myMovies.get(position);
         URL imgURL= NetworkUtilities.buildPosterUrl(movie.getPosterUrl());
         //load image
         Picasso.with(context).load(imgURL.toString()).into(holder.imageView);
@@ -75,7 +81,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterHolder
             int position = getLayoutPosition();
             mOnMovieClickListener.onListItemClicked(position);
             /*Intent intent= new Intent(context, DetailActivity.class);
-            MovieContent.MyMovie movie= MovieContent.MOVIES.get(getLayoutPosition());
+            MyMovie movie= MovieContent.MOVIES.get(getLayoutPosition());
             intent.putExtra("MOVIE", movie);
             context.startActivity(intent);*/
 

@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -28,7 +29,7 @@ public class NetworkUtilities {
     private final static String MOVIEDB_BASE_URL = "http://api.themoviedb.org/3/movie/";
     private final static String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w185/";
     private final static String PARAM_KEY = "api_key";
-    private final static String API_KEY = "abcdefghi"; //needs valid key to work
+    private final static String API_KEY = "60c5a684b38dafaea8e8296973ba0aeb"; //needs valid key to work
 
     /**
      * Builds the JSON URL
@@ -99,8 +100,10 @@ public class NetworkUtilities {
      * @param url same as above
      * @return
      */
-    public static String makeMovies(URL url){
+    //public static String makeMovies(URL url){
+    public static ArrayList<MyMovie> makeMovies(URL url){
         //URL u=url; //for debugging
+        ArrayList<MyMovie> madeMovies = new ArrayList<MyMovie>();
         String result= null;
             try {
                 result=fetchData(url);
@@ -109,7 +112,6 @@ public class NetworkUtilities {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            //finally {
 
             try {
                 JSONObject jObj = new JSONObject(result);
@@ -123,15 +125,16 @@ public class NetworkUtilities {
                     Double rating = obj.getDouble("vote_average");
                     Long id = obj.getLong("id");
 
-                    MovieContent.MyMovie myMovie = new MovieContent.MyMovie(posterURL, synopsis, releaseDate,
+                    MyMovie myMovie = new MyMovie(posterURL, synopsis, releaseDate,
                             title, rating, id);
-                    MovieContent.MOVIES.add(myMovie);
+                    //MovieContent.MOVIES.add(myMovie);
+                    madeMovies.add(myMovie);
 
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return result;
+            return madeMovies;
     }
 
 }

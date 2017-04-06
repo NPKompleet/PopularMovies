@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.phenomenon.popularmovies1.utilities.MovieContent;
+import com.example.phenomenon.popularmovies1.utilities.MyMovie;
 import com.squareup.picasso.Picasso;
 
 import java.net.URL;
@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent= getIntent();
         if (intent.hasExtra(PARCEL_KEY)){
-            MovieContent.MyMovie movie = intent.getParcelableExtra(PARCEL_KEY);
+            MyMovie movie = intent.getParcelableExtra(PARCEL_KEY);
             URL imgURL= buildPosterUrl(movie.getPosterUrl());
             Picasso.with(this).load(imgURL.toString()).into(imgView);
             dView.setText(movie.getReleaseDate());
