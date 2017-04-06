@@ -2,6 +2,7 @@ package com.example.phenomenon.popularmovies1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     ProgressBar mPBar;
     ArrayList<MyMovie> myMovieArray = new ArrayList<>();
     MovieAdapter mAdapter;
+    GridLayoutManager gridLayoutManager;
 
 
     @Override
@@ -43,7 +45,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mMovieGrid = (RecyclerView) findViewById(R.id.rv_movies);
         mPBar= (ProgressBar) findViewById(R.id.progress_bar);
 
-        GridLayoutManager gridLayoutManager= new GridLayoutManager(this, 2);
+        //GridLayoutManager gridLayoutManager= new GridLayoutManager(this, 2);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            gridLayoutManager= new GridLayoutManager(this, 2);
+        }
+        else{
+            gridLayoutManager= new GridLayoutManager(this, 3);
+        }
+
         mMovieGrid.setLayoutManager(gridLayoutManager);
         //mMovieGrid.setHasFixedSize(true);
 
