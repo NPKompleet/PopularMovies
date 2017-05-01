@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -63,23 +64,42 @@
                 android:textStyle="bold"
                 tools:text="8.3/10"/>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detail_left_margin"
+                android:layout_marginTop="@dimen/detail_top_margin"
+                android:src="@drawable/ic_favorite_border_black_24dp"
+                android:id="@+id/detail_favorite"
+                android:layout_below="@id/detail_rating"
+                android:layout_toEndOf="@id/detail_image"
+                android:onClick="saveFavorite"/>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/detail_left_margin"
                 android:layout_marginTop="@dimen/detail_top_margin"
                 android:layout_toEndOf="@+id/detail_image"
-                android:layout_below="@id/detail_rating"
+                android:layout_below="@id/detail_favorite"
                 android:text="@string/detail_button_text"
-                />
+                android:id="@+id/button"/>
+
+
 
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/detail_top_margin"
+            android:text="@string/detail_overview"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/detail_synopsis"
-            android:layout_marginTop="@dimen/detail_top_margin"
             tools:text="Lorem Ipsum Dolor Sit AMet"/>
         <View
             android:layout_width="match_parent"
@@ -89,17 +109,49 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:text="@string/detail_trailer"
                 tools:text="Trailers:"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_trailer"
+                tools:listitem="@layout/trailer_list_item">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#000000"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/detail_review"
+                tools:text="Trailers:"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_review"
+                tools:listitem="@layout/review_list_item">
 
             </android.support.v7.widget.RecyclerView>
 

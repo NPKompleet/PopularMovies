@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.phenomenon.popularmovies1">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.phenomenon.popularmovies1.MainActivity" />
         </activity>
+        <activity android:name=".SettingsActivity"
+            android:label="@string/menu_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.phenomenon.popularmovies1.MainActivity" />
+        </activity>
+        
+        <provider
+            android:authorities="com.example.phenomenon.popularmovies1"
+            android:name="com.example.phenomenon.popularmovies1.data.FavoriteMoviesProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
