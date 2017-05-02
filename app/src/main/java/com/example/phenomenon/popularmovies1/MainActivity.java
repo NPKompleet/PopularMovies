@@ -58,10 +58,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         //GridLayoutManager gridLayoutManager= new GridLayoutManager(this, 2);
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            gridLayoutManager= new GridLayoutManager(this, 2);
+            if (getResources().getBoolean(R.bool.isTablet)){
+                gridLayoutManager = new GridLayoutManager(this, 3);
+            }else {
+                gridLayoutManager = new GridLayoutManager(this, 2);
+            }
         }
         else{
-            gridLayoutManager= new GridLayoutManager(this, 3);
+            if (getResources().getBoolean(R.bool.isTablet)){
+                gridLayoutManager = new GridLayoutManager(this, 4);
+            }else {
+                gridLayoutManager = new GridLayoutManager(this, 3);
+            }
         }
 
         mMovieGrid.setLayoutManager(gridLayoutManager);

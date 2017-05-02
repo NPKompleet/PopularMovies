@@ -161,17 +161,23 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             getReviews(movie.getId());
         }
 
+        Toast.makeText(this, "Click the Heart icon to save Movie as Favorie", Toast.LENGTH_SHORT).show();
+
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 //fab.setImageResource(R.drawable.ic_star_black_24dp);
                 //saveFavorite();
-                Intent shareInt= new Intent(Intent.ACTION_SEND);
-                shareInt.setType("text/plain");
-                URL url = NetworkUtilities.buildYoutubeTrailerUrl(myTrailers.get(0).getKey());
-                shareInt.putExtra(Intent.EXTRA_TEXT,
-                        "Hey, check out this cool movie "+ url.toString());
-                startActivity(shareInt);
+                if(!myTrailers.isEmpty()) {
+                    Intent shareInt = new Intent(Intent.ACTION_SEND);
+                    shareInt.setType("text/plain");
+                    URL url = NetworkUtilities.buildYoutubeTrailerUrl(myTrailers.get(0).getKey());
+                    shareInt.putExtra(Intent.EXTRA_TEXT,
+                            "Hey, check out this cool movie " + url.toString());
+                    startActivity(shareInt);
+                }else{
+                    Toast.makeText(DetailActivity.this, "Nothing to share", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
