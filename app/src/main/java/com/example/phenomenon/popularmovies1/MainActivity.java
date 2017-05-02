@@ -75,8 +75,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         if (savedInstanceState != null){
             //Toast.makeText(this, "oh oh", Toast.LENGTH_SHORT).show();
             sortOption= savedInstanceState.getInt(SORT_OPTION);
-            ArrayList<MyMovie> newMovieArray= savedInstanceState.getParcelableArrayList(MOVIE_LIST);
-            mAdapter.swapData(newMovieArray);
+            //ArrayList<MyMovie> newMovieArray= savedInstanceState.getParcelableArrayList(MOVIE_LIST);
+            myMovieArray= savedInstanceState.getParcelableArrayList(MOVIE_LIST);
+            mAdapter.swapData(myMovieArray);
 
         } else{getMovieBySortOrder("popular");}
 
@@ -124,9 +125,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
-    /*public void getFavoriteMovies(){
 
-    }*/
 
     @Override
     public void onListItemClicked(int clickedItemPosition) {

@@ -91,12 +91,12 @@
                     android:text="@string/detail_button_text"
                     android:id="@+id/button" />
 
-             <!--   <View
-                    android:layout_width="1px"
-                    android:layout_height="match_parent"
-                    android:background="#000000"
-                    android:layout_marginTop="@dimen/detail_top_margin"
-                    android:layout_toEndOf="@id/detail_year"/>-->
+                <!--   <View
+                       android:layout_width="1px"
+                       android:layout_height="match_parent"
+                       android:background="#000000"
+                       android:layout_marginTop="@dimen/detail_top_margin"
+                       android:layout_toEndOf="@id/detail_year"/>-->
 
             </RelativeLayout>
 

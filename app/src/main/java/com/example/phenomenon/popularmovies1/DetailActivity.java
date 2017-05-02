@@ -65,6 +65,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     static final int TRAILER_SEARCH_LOADER= 12;
     static final int REVIEW_SEARCH_LOADER= 13;
     boolean isFavorite;
+    final String TRAILER_LIST= "Trailers";
+    final String REVIEW_LIST= "Reviews";
 
     private LoaderManager.LoaderCallbacks<ArrayList<Review>> reviewLoaderListener =
             new LoaderManager.LoaderCallbacks<ArrayList<Review>>(){
@@ -142,12 +144,21 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         reviewAdapter= new ReviewAdapter(myReviews);
         rRV.setAdapter(reviewAdapter);
 
-        getTrailers(movie.getId());
-        getReviews(movie.getId());
-
         isFavorite = checkFavorite(movie.getId());
         if (isFavorite){
             fav.setImageResource(R.drawable.ic_favorite_black_24dp);
+        }
+
+        if (savedInstanceState != null){
+            //ArrayList<Trailer> newTrailerArray= savedInstanceState.getParcelableArrayList(TRAILER_LIST);
+            myTrailers= savedInstanceState.getParcelableArrayList(TRAILER_LIST);
+            trailerAdapter.swapData(myTrailers);
+            myReviews= savedInstanceState.getParcelableArrayList(REVIEW_LIST);
+            reviewAdapter.swapData(myReviews);
+
+        } else{
+            getTrailers(movie.getId());
+            getReviews(movie.getId());
         }
 
         fab.setOnClickListener(new View.OnClickListener(){
@@ -163,7 +174,19 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 startActivity(shareInt);
             }
         });
+
+
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        //Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
+        bundle.putParcelableArrayList(TRAILER_LIST, myTrailers);
+        bundle.putParcelableArrayList(REVIEW_LIST, myReviews);
+    }
+
 
     public void getTrailers(Long movieID){
         Bundle loaderBundle= new Bundle();
@@ -227,7 +250,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
 
     public void saveFavorite(View view){
-
+        //if it's already a favoite, it is removed instead
         if(isFavorite) {
             Uri uri= FavoriteMoviesContract.FavoriteMoviesEntry.CONTENT_URI;
             uri=uri.buildUpon().appendPath(movie.getId().toString()).build();
@@ -249,7 +272,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         Bitmap bitmap = bitmapDrawable.getBitmap();
         String posterURL = saveToInternalStorage(bitmap, movieTitle);
         Toast.makeText(this, posterURL, Toast.LENGTH_SHORT).show();
-        //saveImage(this, bitmap, "try2", "jpg");
+
         String synopsis= movie.getSynopsis();
         String date= movie.getReleaseDate();
         Double rating = movie.getUserRating();
@@ -274,17 +297,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     }
 
-   /* public void saveImage(Context context, Bitmap b,String name,String extension){
-        name=name+"."+extension;
-        FileOutputStream out;
-        try {
-            out = context.openFileOutput(name, Context.MODE_PRIVATE);
-            b.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+
 
     private String saveToInternalStorage(Bitmap bitmapImage, String name){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -335,7 +348,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 sortOrder);*/
         Cursor cursor = getContentResolver().query(uri, null, null, null,
                 null);
-        int[] list= null;
         ArrayList<Integer> myList= new ArrayList<>();
         if (cursor != null) {
             cursor.moveToFirst();
@@ -343,7 +355,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             for (int i = 0; i < cursor.getCount(); i++){
                 int movId = cursor.getInt(cursor
                         .getColumnIndexOrThrow(FavoriteMoviesContract.FavoriteMoviesEntry.COLUMN_MOVIE_ID));
-                //list[i]= movId;
                 myList.add(movId);
                 cursor.moveToNext();
             }
@@ -352,7 +363,5 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         }
         return (myList.contains(mId.intValue()));
     }
-
-
 
 }
